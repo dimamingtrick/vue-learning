@@ -18,7 +18,7 @@
         ></div>
       </div>
       <b-card-text>{{product.description}}</b-card-text>
-      <b-button href="#" @click="addToCart" variant="primary">Add to cart</b-button>
+      <b-button href="#" @click="addToCart" variant="primary">Add to cart <span class="price">{{product.price}}$</span></b-button>
     </b-card>
     <ImagePreview @closePreview="togglePreview()" :img="product.image" :show="preview"></ImagePreview>
   </b-col>
@@ -29,6 +29,7 @@
   overflow: hidden;
   height: 250px;
   cursor: pointer;
+  margin-bottom: 15px;
 }
 
 .product-img {
@@ -41,6 +42,11 @@
 
 .product-img:hover {
   transform: scale(1.15);
+}
+
+.price {
+  font-weight: bold;
+  margin-left: 5px;
 }
 </style>
 

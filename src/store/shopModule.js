@@ -15,8 +15,13 @@ const getters = {
     return state.shopCartDetailIsOpen;
   },
   addedProductsCount: state => {
-    return state.addedProducts.reduce((sum, currentValue) => {
-      return sum + currentValue.itemsCount;
+    return state.addedProducts.reduce((sum, currentItem) => {
+      return sum + currentItem.itemsCount;
+    }, 0);
+  },
+  totalPrice: state => {
+    return state.addedProducts.reduce((sum, currentItem) => {
+      return sum + currentItem.itemsCount * currentItem.price;
     }, 0);
   }
 };
@@ -54,6 +59,9 @@ const mutations = {
         i.itemsCount = i.itemsCount - 1;
       return i;
     });
+  },
+  DELETE_PRODUCT_FROM_CART: (state, productId) => {
+    state.addedProducts = state.addedProducts.filter(i => i.id !== productId);
   }
 };
 
@@ -101,6 +109,9 @@ const actions = {
   },
   DECREMENT_PRODUCT_COUNT: (context, productId) => {
     context.commit("DECREMENT_PRODUCT_COUNT", productId);
+  },
+  DELETE_PRODUCT_FROM_CART: (context, productId) => {
+    context.commit("DELETE_PRODUCT_FROM_CART", productId);
   }
 };
 

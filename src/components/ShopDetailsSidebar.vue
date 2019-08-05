@@ -7,10 +7,34 @@
       }">
         <span v-if="addedProducts.length === 0">No Added Products</span>
         <ProductInCart v-for="product in addedProducts" :key="product.id" :product="product"></ProductInCart>
+
+        <div v-if="addedProducts.length > 0" class="total">
+          Total price: {{totalPrice}}$
+        </div>
       </div>
     </div>
   </transition>
 </template>
+
+<script>
+import { mapGetters, mapActions } from 'vuex';
+import ProductInCart from './ProductInCart.vue';
+
+export default {
+  name: 'ShopDetailsSidebar',
+  components: { ProductInCart },
+  computed: {
+    ...mapGetters(['addedProducts', 'shopCartDetailIsOpen', 'totalPrice'])
+  },
+  methods: {
+    ...mapActions(['TOGGLE_CART_DETAILS']),
+
+    toggleCartSibebar() {
+      this.$store.dispatch('TOGGLE_CART_DETAILS');
+    }
+  }
+};
+</script>
 
 <style scoped>
 .cart-sidebar {
@@ -38,7 +62,7 @@
   right: 0;
   display: flex;
   flex-direction: column;
-  padding: 25px 15px;
+  padding: 25px 15px 50px 15px;
   overflow-y: auto;
   align-items: center;
 }
@@ -78,24 +102,3 @@
   transform: translateX(100%);
 }
 </style>
-
-<script>
-import { mapGetters, mapActions } from "vuex";
-import ProductInCart from './ProductInCart.vue';
-
-export default {
-  name: "ShopDetailsSidebar",
-  components: { ProductInCart },
-  computed: {
-    ...mapGetters(["addedProducts", "shopCartDetailIsOpen"])
-  },
-  methods: {
-    ...mapActions(["TOGGLE_CART_DETAILS"]),
-
-    toggleCartSibebar() {
-      console.log(this.addedProducts);
-      this.$store.dispatch("TOGGLE_CART_DETAILS");
-    }
-  }
-};
-</script>
