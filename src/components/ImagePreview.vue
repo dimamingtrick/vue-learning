@@ -1,9 +1,11 @@
 <template>
-  <div v-if="show" class="preview">
-    <div class="preview-bg" @click="closePreview()"></div>
-    <b-button variant="danger" @click="closePreview()">x</b-button>
-    <img :src="img" alt="img" class="preview-img" />
-  </div>
+  <transition name="slide-fade">
+    <div v-if="show" class="preview">
+      <div class="preview-bg" @click="closePreview()"></div>
+      <b-button variant="danger" @click="closePreview()">x</b-button>
+      <img :src="img" alt="img" class="preview-img" />
+    </div>
+  </transition>
 </template>
 
 <style scoped>
@@ -17,6 +19,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.slide-fade-enter-active {
+  transition: all .25s ease;
+}
+.slide-fade-leave-active {
+  transition: all .25s;
+  opacity: 1;
+}
+.slide-fade-enter, .slide-fade-leave-to {
+  opacity: 0;
 }
 
 .preview-bg {
