@@ -19,6 +19,9 @@
         <li>
           <router-link to="/todo-list">Todo List</router-link>
         </li>
+        <li>
+          <ShopCard></ShopCard>
+        </li>
       </ul>
     </div>
   </div>
@@ -48,6 +51,7 @@
     margin: 15px 0;
     padding: 0;
     display: flex;
+    align-items: center;
   }
 
   .router-links li {
@@ -57,7 +61,10 @@
 </style>
 
 <script>
+import ShopCard from "./ShopCard.vue";
+
 export default {
   name: "Header",
+  components: { ShopCard }
 }
 </script>

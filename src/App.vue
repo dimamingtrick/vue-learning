@@ -2,17 +2,21 @@
   <div id="app">
     <Header />
     <router-view></router-view>
+    <ShopDetailsSidebar></ShopDetailsSidebar>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Header from './components/Header.vue';
+import ShopDetailsSidebar from './components/ShopDetailsSidebar.vue';
 
 export default {
   name: 'app',
-  components: {
-    Header
-  },
+  components: { Header, ShopDetailsSidebar },
+  computed: {
+    ...mapGetters(['shopCartDetailIsOpen'])
+  }
 }
 </script>
 

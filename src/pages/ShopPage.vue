@@ -37,7 +37,6 @@ export default {
   mounted() {
     this.$store.dispatch("GET_ALL_PRODUCTS").then(() => {
       this.isLoading = false;
-      console.log(this.shopList);
     });
   }
 };

@@ -1,11 +1,9 @@
 <template>
-  <b-col>
     <b-card
       :title="product.name"
       :img-alt="product.name"
       img-top
       tag="article"
-      style="max-width: 20rem;"
       class="mb-2 product"
     >
       <div class="product-img-container">
@@ -14,17 +12,23 @@
           :style="{
           background: `url('${product.image}')`
         }"
-          @click="togglePreview()"
         ></div>
       </div>
       <b-card-text>{{product.description}}</b-card-text>
-      <b-button href="#" @click="addToCart" variant="primary">Add to cart</b-button>
+
+      <div class="items-count-row">
+        <b-button href="#" variant="primary" @click="decrementItems()">-</b-button>
+      <b-badge pill variant="info">{{product.itemsCount}}</b-badge>
+      <b-button href="#" variant="primary" @click="incrementItems()">+</b-button>
+      </div>
     </b-card>
-    <ImagePreview @closePreview="togglePreview()" :img="product.image" :show="preview"></ImagePreview>
-  </b-col>
 </template>
 
 <style>
+.product {
+  width: 80%;
+}
+
 .product-img-container {
   overflow: hidden;
   height: 250px;
@@ -39,30 +43,44 @@
   background-position: center !important;
 }
 
-.product-img:hover {
-  transform: scale(1.15);
+.items-count-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
+
+.items-count-row span {
+  font-size: 85%;
+  padding: 0.6rem;
+}
+
+.items-count-row button {
+  padding: 10px;
+  line-height: 0.5;
+}
+
 </style>
 
 <script>
 import ImagePreview from "./ImagePreview.vue";
 
 export default {
-  name: "Product",
+  name: "ProductInCart",
   components: { ImagePreview },
-  data () {
+  data() {
     return {
       preview: false
-    }
+    };
   },
   props: ["product"],
   methods: {
-    togglePreview () {
-      this.preview = !this.preview;
+    incrementItems () {
+      this.$store.dispatch('INCREMENT_PRODUCT_COUNT', this.product.id);
     },
-    addToCart () {
-      this.$store.dispatch("ADD_TO_CART", this.product);
+    decrementItems () {
+      this.$store.dispatch('DECREMENT_PRODUCT_COUNT', this.product.id);
     }
   }
 };
 </script>
+
