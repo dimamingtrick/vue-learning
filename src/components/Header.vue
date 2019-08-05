@@ -11,6 +11,9 @@
           <router-link to="/">Home</router-link>
         </li>
         <li>
+          <router-link to="/shop">Shop</router-link>
+        </li>
+        <li>
           <router-link to="/todo-form">Todo Form</router-link>
         </li>
         <li>
@@ -25,7 +28,7 @@
   .header {
     width: 100%;
     padding: 15px 0 5px 0;
-    background: rgba(155, 200, 57, .15);
+    border-bottom: 1px solid rgba(237, 227, 255, 0.64);
     display: flex;
     flex-direction: column;
     align-items: center;
