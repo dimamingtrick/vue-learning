@@ -92,6 +92,14 @@ const actions = {
             image:
               "https://images-na.ssl-images-amazon.com/images/I/61fZ%2BYAYGaL._SY355_.jpg",
             price: 5
+          },
+          {
+            id: 4,
+            name: "WANYK album",
+            description: "The 6th Slipknot album 'We Are Not Your Kind",
+            image:
+              "https://wrat.com/wp-content/uploads/sites/27/2019/05/Slipknot-WANYK-Album-Art-LO.jpg",
+            price: 12
           }
         ]);
       }, 1500);

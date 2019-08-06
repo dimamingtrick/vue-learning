@@ -1,5 +1,5 @@
 <template>
-  <b-col>
+  <b-col md="6" cols="12" lg="3">
     <b-card
       :title="product.name"
       :img-alt="product.name"
@@ -25,6 +25,21 @@
 </template>
 
 <style>
+.product {
+  width: 100%;
+}
+
+.product .card-body {
+  padding: 5px!important;
+}
+
+.product .card-text {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .product-img-container {
   overflow: hidden;
   height: 250px;
