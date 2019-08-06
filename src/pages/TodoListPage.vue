@@ -67,7 +67,7 @@ export default {
 
 <style scoped>
 #todoListPage {
-  background: rgba(98, 221, 27, 0.75);
+  /* background: rgba(98, 221, 27, 0.75); */
 }
 
 .deleteSpinner {

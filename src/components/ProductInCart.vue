@@ -24,14 +24,13 @@
 .product {
   width: 90%;
   padding-bottom: 45px;
-  max-width: 380px;
+  border: 1px solid rgba(0, 0, 0, 0.45)!important;
 }
 
 .product-img-container {
   overflow: hidden;
   height: 175px;
-  cursor: pointer;
-  border: 1px solid #37474f4f;
+  cursor: auto!important;
   border-radius: 3px;
 }
 
@@ -42,6 +41,9 @@
   background-size: contain !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
+}
+.product-img:hover {
+  transform: scale(1)!important;
 }
 
 .items-count-row {

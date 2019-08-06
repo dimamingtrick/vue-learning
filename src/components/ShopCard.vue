@@ -1,6 +1,7 @@
 <template>
   <div class="text-center">
     <b-button
+      id="productCart"
       class="shop-button"
       :key="addedProductsCount"
       @click="toggleShopCard()"
@@ -30,6 +31,7 @@
 .shop-btn-content {
   padding: 2px;
   border-radius: 10px;
+  background: #fff;
   animation: pulse 1s forwards;
 }
 

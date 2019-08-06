@@ -54,6 +54,13 @@ export default {
       isSubmitting: false
     };
   },
+  watch: {
+    shopCartDetailIsOpen () {
+      this.shopCartDetailIsOpen
+        ? (document.querySelector(".page").style.overflowY = "hidden")
+        : (document.querySelector(".page").style.overflowY = "auto");
+    }
+  },
   methods: {
     ...mapActions(["TOGGLE_CART_DETAILS"]),
 
@@ -68,19 +75,24 @@ export default {
     },
     submit(formValue) {
       this.isSubmitting = true;
-      this.$store.dispatch("SUBMIT_CART_FORM", {
-        name: formValue.name,
-        price: this.totalPrice
-      }).then(res => {
-        this.isSubmitting = false;
-        this.toggleSubmitForm();
-        this.toggleCartSibebar();
-        this.$bvToast.toast(`Congratulations, ${res.name}, you have successfully submitted the products for ${res.price}$!`, {
-          title: 'Congratulations',
-          variant: "success",
-          solid: true
+      this.$store
+        .dispatch("SUBMIT_CART_FORM", {
+          name: formValue.name,
+          price: this.totalPrice
+        })
+        .then(res => {
+          this.isSubmitting = false;
+          this.toggleSubmitForm();
+          this.toggleCartSibebar();
+          this.$bvToast.toast(
+            `Congratulations, ${res.name}, you have successfully submitted the products for ${res.price}$!`,
+            {
+              title: "Congratulations",
+              variant: "success",
+              solid: true
+            }
+          );
         });
-      });
     },
     clearCart() {
       this.$bvModal
@@ -105,6 +117,7 @@ export default {
   height: 100%;
   top: 0;
   left: 0;
+  z-index: 1001;
 }
 
 .background {
@@ -145,14 +158,14 @@ export default {
 }
 
 .slide-fade-right-enter-active {
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
 }
 .slide-fade-right-enter-active .sidebar {
   transition: all 0.3s ease;
 }
 
 .slide-fade-right-leave-active {
-  transition: all 0.5s;
+  transition: all 0.3s;
   opacity: 1;
 }
 .slide-fade-right-leave-active .sidebar {

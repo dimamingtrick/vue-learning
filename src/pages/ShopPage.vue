@@ -11,9 +11,36 @@
   </div>
 </template>
 
+<script>
+import { mapActions, mapGetters } from "vuex";
+import Product from "../components/Product.vue";
+import MainPreloader from "../components/MainPreloader.vue";
+
+export default {
+  name: "ShopPage",
+  components: { Product, MainPreloader },
+  computed: {
+    ...mapGetters(["products"])
+  },
+  data() {
+    return {
+      isLoading: true
+    };
+  },
+  methods: {
+    ...mapActions(["ADD_TODO"])
+  },
+  mounted() {
+    this.$store.dispatch("GET_ALL_PRODUCTS").then(() => {
+      this.isLoading = false;
+    });
+  }
+};
+</script>
+
 <style scoped>
 #shopPage {
-  background: linear-gradient(to right, #2193b0, #6dd5ed); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  /* background: linear-gradient(to right, #2193b0, #6dd5ed); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .absoluteCenterLoader {
@@ -47,31 +74,3 @@
   opacity: 0;
 }
 </style>
-
-<script>
-import { mapActions, mapGetters } from "vuex";
-import Product from "../components/Product.vue";
-import MainPreloader from "../components/MainPreloader.vue";
-
-export default {
-  name: "ShopPage",
-  components: { Product, MainPreloader },
-  computed: {
-    ...mapGetters(["products"])
-  },
-  data() {
-    return {
-      isLoading: true
-    };
-  },
-  methods: {
-    ...mapActions(["ADD_TODO"])
-  },
-  mounted() {
-    this.$store.dispatch("GET_ALL_PRODUCTS").then(() => {
-      this.isLoading = false;
-    });
-  }
-};
-</script>
-

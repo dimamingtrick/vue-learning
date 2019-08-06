@@ -15,7 +15,7 @@ export default {
   name: "app",
   components: { Header, ShopDetailsSidebar },
   computed: {
-    ...mapGetters(["shopCartDetailIsOpen"])
+    ...mapGetters(["shopCartDetailIsOpen"]),
   }
 };
 </script>
@@ -44,5 +44,7 @@ html,
 #app > .page {
   flex: 1;
   padding: 25px 15px;
+  background: linear-gradient(to right, #1F404C, #99F2FA);
+  margin-top: 60px;
 }
 </style>

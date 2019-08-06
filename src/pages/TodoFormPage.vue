@@ -71,7 +71,7 @@ export default {
 
 <style scoped>
 #todoFormPage {
-  background: rgba(22, 32, 245, 0.1);
+  /* background: rgba(22, 32, 245, 0.1); */
 }
 
 button {

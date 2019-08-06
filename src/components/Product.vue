@@ -18,7 +18,10 @@
         ></div>
       </div>
       <b-card-text>{{product.description}}</b-card-text>
-      <b-button href="#" @click="addToCart" variant="primary">Add to cart <span class="price">{{product.price}}$</span></b-button>
+      <b-button href="#" @click="addToCart" variant="primary">
+        Add to cart
+        <span class="price">{{product.price}}$</span>
+      </b-button>
     </b-card>
     <ImagePreview @closePreview="togglePreview()" :img="product.image" :show="preview"></ImagePreview>
   </b-col>
@@ -26,34 +29,74 @@
 
 <script>
 import ImagePreview from "./ImagePreview.vue";
+import { setInterval, setTimeout } from "timers";
 
 export default {
   name: "Product",
   components: { ImagePreview },
-  data () {
+  data() {
     return {
       preview: false
-    }
+    };
   },
   props: ["product"],
   methods: {
-    togglePreview () {
+    togglePreview() {
       this.preview = !this.preview;
     },
-    addToCart () {
+    addToCart(e) {
+      console.log(e);
       this.$store.dispatch("ADD_TO_CART", this.product);
+
+      const cart = document.getElementById("productCart");
+      const cartCoords = cart.getBoundingClientRect();
+
+      const item = document.createElement("div");
+
+      item.className = "addedItem";
+      item.style.top = e.pageY + "px";
+      item.style.left = e.pageX + "px";
+
+      const app = document.getElementById("app");
+      app.appendChild(item);
+      
+      let x = cartCoords.top;
+      let y = cartCoords.left;
+      let i = 1;
+      let j = 1;
+      console.log(item.offsetLeft + 1 + "px")
+      function animateItem() {
+        if (item.style.top >= y + 'px' || item.style.left <= x + 'px') {
+
+          setTimeout(() => {
+            if (item.style.top >= y + 'px') item.style.top = item.offsetTop - 3 + "px";
+            if (item.style.left <= x + 'px') item.style.left = item.offsetLeft + 3 + "px";
+            animateItem();
+          }, 0);
+        }
+      }
+
+      animateItem();
     }
   }
 };
 </script>
 
 <style>
+.addedItem {
+  width: 50px;
+  height: 50px;
+  background: red;
+  position: absolute;
+  z-index: 10000;
+}
+
 .product {
   width: 100%;
 }
 
 .product .card-body {
-  padding: 5px!important;
+  padding: 5px !important;
 }
 
 .product .card-text {
@@ -76,7 +119,7 @@ export default {
   transition: all 0.3s;
   background-size: contain !important;
   background-position: center !important;
-  background-repeat: no-repeat!important;
+  background-repeat: no-repeat !important;
 }
 
 .product-img:hover {
@@ -89,7 +132,10 @@ export default {
 }
 </style>
 <style scoped>
-  .product {
-    padding-bottom: 5px!important;
-  }
+.product {
+  padding-bottom: 5px !important;
+}
+.product .card-text {
+  margin-bottom: 5px;
+}
 </style>
