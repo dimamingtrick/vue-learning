@@ -35,16 +35,16 @@
 
 @keyframes pulse {
   0% {
-    -moz-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0.4);
-    box-shadow: 0 0 0 0 rgba(204, 169, 44, 0.4);
+    -moz-box-shadow: 0 0 0 0 rgba(22, 205, 230, 0.4);
+    box-shadow: 0 0 0 0 rgba(22, 205, 230, 0.4);
   }
   70% {
-    -moz-box-shadow: 0 0 0 15px rgba(204, 169, 44, 0);
-    box-shadow: 0 0 0 15px rgba(204, 169, 44, 0);
+    -moz-box-shadow: 0 0 0 15px rgba(22, 205, 230, 0);
+    box-shadow: 0 0 0 15px rgba(22, 205, 230, 0);
   }
   100% {
-    -moz-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
-    box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+    -moz-box-shadow: 0 0 0 0 rgba(22, 205, 230, 0);
+    box-shadow: 0 0 0 0 rgba(22, 205, 230, 0);
   }
 }
 </style>

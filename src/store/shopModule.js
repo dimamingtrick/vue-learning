@@ -62,6 +62,12 @@ const mutations = {
   },
   DELETE_PRODUCT_FROM_CART: (state, productId) => {
     state.addedProducts = state.addedProducts.filter(i => i.id !== productId);
+  },
+  CLEAR_CART: state => {
+    state.addedProducts = [];
+  },
+  SUBMIT_CART_FORM: state => {
+    state.addedProducts = [];
   }
 };
 
@@ -100,6 +106,14 @@ const actions = {
             image:
               "https://wrat.com/wp-content/uploads/sites/27/2019/05/Slipknot-WANYK-Album-Art-LO.jpg",
             price: 12
+          },
+          {
+            id: 5,
+            name: "Cup",
+            description: "Just a simple blue cup",
+            image:
+              "http://acmecups.ru/wp-content/uploads/2018/02/KK-1035-MightyCup350ml-Kokako-Cropped_1024x1024@2x-1.jpg",
+            price: 5
           }
         ]);
       }, 1500);
@@ -120,6 +134,19 @@ const actions = {
   },
   DELETE_PRODUCT_FROM_CART: (context, productId) => {
     context.commit("DELETE_PRODUCT_FROM_CART", productId);
+  },
+  CLEAR_CART: context => {
+    context.commit("CLEAR_CART");
+  },
+  SUBMIT_CART_FORM: async (context, formValue) => {
+    const form = await new Promise(resolve => {
+      setTimeout(() => {
+        resolve(formValue);
+      }, 2000);
+    });
+
+    context.commit("SUBMIT_CART_FORM");
+    return form;
   }
 };
 

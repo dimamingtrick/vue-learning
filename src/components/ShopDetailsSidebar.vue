@@ -5,32 +5,94 @@
       <div class="sidebar" :class="{
         'empty-sidebar': addedProducts.length === 0
       }">
-        <span v-if="addedProducts.length === 0">No Added Products</span>
-        <ProductInCart v-for="product in addedProducts" :key="product.id" :product="product"></ProductInCart>
-
-        <div v-if="addedProducts.length > 0" class="total">
-          Total price: {{totalPrice}}$
+        <div class="sidebar-products">
+          <span v-if="addedProducts.length === 0">No Added Products</span>
+          <ProductInCart v-for="product in addedProducts" :key="product.id" :product="product"></ProductInCart>
         </div>
+        <div v-if="addedProducts.length > 0" class="total">
+          Total price:
+          <span>{{totalPrice}}$</span>
+        </div>
+        <b-button-group v-if="addedProducts.length > 0" class="shop-buttons">
+          <b-button variant="info" @click="toggleSubmitForm()">Submit</b-button>
+          <b-button @click="clearCart()">Clear cart</b-button>
+        </b-button-group>
       </div>
+
+      <b-modal
+        hide-footer
+        id="modal-prevent-closing"
+        ref="modal"
+        title="Enter your name to submit"
+        v-model="showSubmitModal"
+        @hide="closeModal"
+      >
+        <SubmitProductsForm
+          @submitForm="submit"
+          @closeForm="toggleSubmitForm"
+          :isSubmitting="isSubmitting"
+        ></SubmitProductsForm>
+      </b-modal>
     </div>
   </transition>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import ProductInCart from './ProductInCart.vue';
+import { mapGetters, mapActions } from "vuex";
+import ProductInCart from "./ProductInCart.vue";
+import SubmitProductsForm from "./SubmitProductsForm.vue";
 
 export default {
-  name: 'ShopDetailsSidebar',
-  components: { ProductInCart },
+  name: "ShopDetailsSidebar",
+  components: { ProductInCart, SubmitProductsForm },
   computed: {
-    ...mapGetters(['addedProducts', 'shopCartDetailIsOpen', 'totalPrice'])
+    ...mapGetters(["addedProducts", "shopCartDetailIsOpen", "totalPrice"])
+  },
+  data() {
+    return {
+      showSubmitModal: false,
+      isSubmitting: false
+    };
   },
   methods: {
-    ...mapActions(['TOGGLE_CART_DETAILS']),
+    ...mapActions(["TOGGLE_CART_DETAILS"]),
 
     toggleCartSibebar() {
-      this.$store.dispatch('TOGGLE_CART_DETAILS');
+      this.$store.dispatch("TOGGLE_CART_DETAILS");
+    },
+    toggleSubmitForm() {
+      this.showSubmitModal = !this.showSubmitModal;
+    },
+    closeModal() {
+      this.isSubmitting = false;
+    },
+    submit(formValue) {
+      this.isSubmitting = true;
+      this.$store.dispatch("SUBMIT_CART_FORM", {
+        name: formValue.name,
+        price: this.totalPrice
+      }).then(res => {
+        this.isSubmitting = false;
+        this.toggleSubmitForm();
+        this.toggleCartSibebar();
+        this.$bvToast.toast(`Congratulations, ${res.name}, you have successfully submitted the products for ${res.price}$!`, {
+          title: 'Congratulations',
+          variant: "success",
+          solid: true
+        });
+      });
+    },
+    clearCart() {
+      this.$bvModal
+        .msgBoxConfirm("Do you realy want to clear all product in cart ?", {
+          title: "Clear all cart ?",
+          centered: true,
+          okTitle: "Yes",
+          cancelTitle: "No"
+        })
+        .then(res => {
+          if (res) this.$store.dispatch("CLEAR_CART");
+        });
     }
   }
 };
@@ -62,9 +124,15 @@ export default {
   right: 0;
   display: flex;
   flex-direction: column;
-  padding: 25px 15px 50px 15px;
+  padding: 0 0 38px 0;
+}
+
+.sidebar-products {
   overflow-y: auto;
   align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 25px 15px 0 15px;
 }
 
 .empty-sidebar {
@@ -100,5 +168,24 @@ export default {
 .slide-fade-right-enter .sidebar,
 .slide-fade-right-leave-to .sidebar {
   transform: translateX(100%);
+}
+
+.shop-buttons {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.shop-buttons button {
+  border-radius: 0;
+}
+.total {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  padding: 10px;
+  margin-top: auto;
+}
+.total span {
+  font-weight: bold;
 }
 </style>

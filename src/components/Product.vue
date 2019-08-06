@@ -24,6 +24,29 @@
   </b-col>
 </template>
 
+<script>
+import ImagePreview from "./ImagePreview.vue";
+
+export default {
+  name: "Product",
+  components: { ImagePreview },
+  data () {
+    return {
+      preview: false
+    }
+  },
+  props: ["product"],
+  methods: {
+    togglePreview () {
+      this.preview = !this.preview;
+    },
+    addToCart () {
+      this.$store.dispatch("ADD_TO_CART", this.product);
+    }
+  }
+};
+</script>
+
 <style>
 .product {
   width: 100%;
@@ -51,12 +74,13 @@
   width: 100%;
   height: 100%;
   transition: all 0.3s;
-  background-size: cover !important;
+  background-size: contain !important;
   background-position: center !important;
+  background-repeat: no-repeat!important;
 }
 
 .product-img:hover {
-  transform: scale(1.15);
+  transform: scale(1.025);
 }
 
 .price {
@@ -64,26 +88,8 @@
   margin-left: 5px;
 }
 </style>
-
-<script>
-import ImagePreview from "./ImagePreview.vue";
-
-export default {
-  name: "Product",
-  components: { ImagePreview },
-  data () {
-    return {
-      preview: false
-    }
-  },
-  props: ["product"],
-  methods: {
-    togglePreview () {
-      this.preview = !this.preview;
-    },
-    addToCart () {
-      this.$store.dispatch("ADD_TO_CART", this.product);
-    }
+<style scoped>
+  .product {
+    padding-bottom: 5px!important;
   }
-};
-</script>
+</style>

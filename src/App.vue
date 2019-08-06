@@ -7,22 +7,23 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import Header from './components/Header.vue';
-import ShopDetailsSidebar from './components/ShopDetailsSidebar.vue';
+import { mapGetters } from "vuex";
+import Header from "./components/Header.vue";
+import ShopDetailsSidebar from "./components/ShopDetailsSidebar.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: { Header, ShopDetailsSidebar },
   computed: {
-    ...mapGetters(['shopCartDetailIsOpen'])
+    ...mapGetters(["shopCartDetailIsOpen"])
   }
-}
+};
 </script>
 
 <style>
-
-body, html, #app {
+body,
+html,
+#app {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -30,7 +31,7 @@ body, html, #app {
 }
 
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -42,7 +43,6 @@ body, html, #app {
 
 #app > .page {
   flex: 1;
-  padding: 15px;
+  padding: 25px 15px;
 }
-
 </style>

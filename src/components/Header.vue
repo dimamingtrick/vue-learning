@@ -1,10 +1,11 @@
 <template>
   <div class="header">
-    <img id="vue-logo" alt="Vue logo" src="../assets/logo.png">
-    <div class="header-title">
-      It is a best header in the world!
+    <router-link to="/">
+      <img id="vue-logo" alt="Vue logo" src="../assets/logo.png" />
+    </router-link>
+    <div class="page-title">
+      <router-link :to="$route.path">{{$route.name}}</router-link>
     </div>
-
     <div class="header-links">
       <ul class="router-links">
         <li>
@@ -28,36 +29,52 @@
 </template>
 
 <style>
-  .header {
-    width: 100%;
-    padding: 15px 0 5px 0;
-    border-bottom: 1px solid rgba(237, 227, 255, 0.64);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.header {
+  width: 100%;
+  padding: 5px 15px;
+  border-bottom: 1px solid rgba(237, 227, 255, 0.64);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  #vue-logo {
-    width: 50px;
-    margin-bottom: 15px;
-  }
+#vue-logo {
+  width: 50px;
+}
 
-  .buttons-row {
-    display: flex;
-    justify-content: space-around;
-  }
+.buttons-row {
+  display: flex;
+  justify-content: space-around;
+}
 
-  .router-links {
-    margin: 15px 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-  }
+.router-links {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
 
-  .router-links li {
-    list-style-type: none;
-    margin: 0 15px;
-  }
+.router-links li {
+  list-style-type: none;
+  margin: 0 15px;
+}
+
+.router-links li:last-child {
+  margin-right: 0;
+}
+
+.page-title {
+  margin-right: auto;
+  margin-left: 25px;
+  font-size: 25px;
+  font-weight: bold;
+}
+.page-title a {
+  color: #2c3e50;
+}
+.page-title a:hover {
+  text-decoration: none;
+}
 </style>
 
 <script>
@@ -65,6 +82,9 @@ import ShopCard from "./ShopCard.vue";
 
 export default {
   name: "Header",
-  components: { ShopCard }
-}
+  components: { ShopCard },
+  mounted() {
+    console.log(this.$route);
+  }
+};
 </script>

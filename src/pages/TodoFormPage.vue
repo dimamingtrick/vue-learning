@@ -1,6 +1,5 @@
 <template>
   <div class="page" id="todoFormPage">
-    <h1>TODO FORM</h1>
     <b-container>
       <b-row>
         <b-col>
@@ -36,12 +35,12 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "TodoFormPage",
   computed: {
-    ...mapGetters(['todos']),
+    ...mapGetters(["todos"])
   },
   data: () => ({
     form: {
@@ -50,18 +49,17 @@ export default {
     loading: false
   }),
   methods: {
-    ...mapActions(['ADD_TODO']),
+    ...mapActions(["ADD_TODO"]),
 
     onSubmit(e) {
       e.preventDefault();
       if (this.loading) return;
 
       this.loading = true;
-      this.$store.dispatch('ADD_TODO', this.form).then(() => {
+      this.$store.dispatch("ADD_TODO", this.form).then(() => {
         this.onReset();
         this.loading = false;
       });
-      
     },
     onReset(e) {
       if (e) e.preventDefault();

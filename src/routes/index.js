@@ -9,18 +9,25 @@ import ShopPage from "../pages/ShopPage.vue";
 Vue.use(VueRouter);
 
 const routes = [
-  { path: "/", component: HomePage },
+  {
+    path: "/",
+    component: HomePage,
+    name: "Home Page"
+  },
   {
     path: "/shop",
-    component: ShopPage
+    component: ShopPage,
+    name: "Shop Page"
   },
   {
     path: "/todo-form",
-    component: TodoFormPage
+    component: TodoFormPage,
+    name: "Todo Form Page"
   },
   {
     path: "/todo-list",
-    component: TodoListPage
+    component: TodoListPage,
+    name: "Todo List Page"
   }
 ];
 

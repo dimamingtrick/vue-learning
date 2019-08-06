@@ -1,6 +1,5 @@
 <template>
   <div class="page" id="shopPage">
-    <h1>SHOP PAGE</h1>
     <b-container fluid>
       <transition name="fade">
         <MainPreloader class="absoluteCenterLoader" v-if="isLoading"></MainPreloader>
@@ -14,7 +13,7 @@
 
 <style scoped>
 #shopPage {
-  background: rgba(236, 224, 184, 0.2);
+  background: linear-gradient(to right, #2193b0, #6dd5ed); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .absoluteCenterLoader {

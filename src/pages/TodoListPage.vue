@@ -1,6 +1,5 @@
 <template>
   <div class="page" id="todoListPage">
-    <h1>TODO LIST</h1>
     <b-container>
       <b-row>
         <b-col>
@@ -79,7 +78,6 @@ export default {
 }
 </style>
 <style>
-  
 .todo {
   display: flex;
   justify-content: center;

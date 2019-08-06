@@ -6,7 +6,6 @@
         }"></div>
     </div>
     <b-card-text>{{product.description}}</b-card-text>
-
     <div class="items-count-row">
       <b-button variant="primary" @click="decrementItems()">-</b-button>
       <b-badge pill variant="info">{{product.itemsCount}}</b-badge>
@@ -25,6 +24,7 @@
 .product {
   width: 90%;
   padding-bottom: 45px;
+  max-width: 380px;
 }
 
 .product-img-container {
@@ -39,9 +39,9 @@
   width: 100%;
   height: 100%;
   transition: all 0.3s;
-  background-size: contain!important;
+  background-size: contain !important;
   background-position: center !important;
-  background-repeat: no-repeat!important;
+  background-repeat: no-repeat !important;
 }
 
 .items-count-row {
@@ -87,7 +87,16 @@ export default {
       this.$store.dispatch("DECREMENT_PRODUCT_COUNT", this.product.id);
     },
     deleteProductFromCart() {
-      this.$store.dispatch("DELETE_PRODUCT_FROM_CART", this.product.id);
+        this.$bvModal
+        .msgBoxConfirm("You will not be able to return it", {
+          title: "Delete this product from cart ?",
+          centered: true,
+          okTitle: "Yes",
+          cancelTitle: "No"
+        })
+        .then(res => {
+          if (res) this.$store.dispatch("DELETE_PRODUCT_FROM_CART", this.product.id);
+        });
     }
   }
 };
