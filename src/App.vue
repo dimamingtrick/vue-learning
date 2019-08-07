@@ -39,6 +39,7 @@ html,
 
   display: flex;
   flex-direction: column;
+  overflow: auto!important;
 }
 
 #app > .page {
@@ -46,5 +47,6 @@ html,
   padding: 25px 15px;
   background: linear-gradient(to right, #1F404C, #99F2FA);
   margin-top: 60px;
+  overflow: auto;
 }
 </style>

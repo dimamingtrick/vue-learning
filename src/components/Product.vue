@@ -29,7 +29,8 @@
 
 <script>
 import ImagePreview from "./ImagePreview.vue";
-import { setInterval, setTimeout } from "timers";
+
+import { animateAddedCartItem } from "../helpers";
 
 export default {
   name: "Product",
@@ -45,38 +46,9 @@ export default {
       this.preview = !this.preview;
     },
     addToCart(e) {
-      console.log(e);
       this.$store.dispatch("ADD_TO_CART", this.product);
 
-      const cart = document.getElementById("productCart");
-      const cartCoords = cart.getBoundingClientRect();
-
-      const item = document.createElement("div");
-
-      item.className = "addedItem";
-      item.style.top = e.pageY + "px";
-      item.style.left = e.pageX + "px";
-
-      const app = document.getElementById("app");
-      app.appendChild(item);
-      
-      let x = cartCoords.top;
-      let y = cartCoords.left;
-      let i = 1;
-      let j = 1;
-      console.log(item.offsetLeft + 1 + "px")
-      function animateItem() {
-        if (item.style.top >= y + 'px' || item.style.left <= x + 'px') {
-
-          setTimeout(() => {
-            if (item.style.top >= y + 'px') item.style.top = item.offsetTop - 3 + "px";
-            if (item.style.left <= x + 'px') item.style.left = item.offsetLeft + 3 + "px";
-            animateItem();
-          }, 0);
-        }
-      }
-
-      animateItem();
+      animateAddedCartItem(e);
     }
   }
 };
@@ -86,9 +58,23 @@ export default {
 .addedItem {
   width: 50px;
   height: 50px;
-  background: red;
-  position: absolute;
+  background: transparent;
+  border-radius: 50%;
+  overflow: hidden;
+  position: fixed;
   z-index: 10000;
+  border: 1px solid #000;
+  opacity: .75;
+  animation: fadeIn .5s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .product {
