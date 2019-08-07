@@ -63,7 +63,7 @@ export default {
   border-radius: 50%;
   overflow: hidden;
   position: fixed;
-  z-index: 10000;
+  z-index: 1001;
   border: 1px solid #000;
   opacity: .75;
   animation: fadeIn .5s forwards;

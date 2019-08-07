@@ -44,7 +44,7 @@ export const animateAddedCartItem = e => {
             item.style.left = itemCoords("left") + xSpeed() + "px";
           }
           animateItem();
-        }, 0);
+        });
       } else {
         item.remove();
         resolve(true);
