@@ -67,6 +67,7 @@ export default {
   border: 1px solid #000;
   opacity: .75;
   animation: fadeIn .5s forwards;
+  pointer-events: none;
 }
 
 .removeItem {
