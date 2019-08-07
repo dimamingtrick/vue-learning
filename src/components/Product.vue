@@ -69,12 +69,29 @@ export default {
   animation: fadeIn .5s forwards;
 }
 
+.removeItem {
+  animation: removeItemAnimation .5s forwards;
+}
 @keyframes fadeIn {
-  from {
+  0% {
     opacity: 0;
   }
-  to {
+  50% {
     opacity: 1;
+  }
+  100% {
+    opacity: .9;
+  }
+}
+
+
+@keyframes removeItemAnimation {
+  from {
+    opacity: .75;
+  }
+  to {
+    opacity: 0;
+    transform: scale(5);
   }
 }
 
