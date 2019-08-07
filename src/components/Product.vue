@@ -46,9 +46,9 @@ export default {
       this.preview = !this.preview;
     },
     addToCart(e) {
-      this.$store.dispatch("ADD_TO_CART", this.product);
-
-      animateAddedCartItem(e);
+      animateAddedCartItem(e).then(res => {
+        this.$store.dispatch("ADD_TO_CART", this.product);
+      });
     }
   }
 };
