@@ -56,9 +56,10 @@ export default {
 
 <style>
 .addedItem {
-  width: 50px;
-  height: 50px;
-  background: transparent;
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+  background: #fff;
   border-radius: 50%;
   overflow: hidden;
   position: fixed;

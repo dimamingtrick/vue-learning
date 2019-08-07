@@ -1,4 +1,4 @@
-import image from "../assets/cart.jpg";
+import image from "../assets/cart.png";
 
 export const animateAddedCartItem = e => {
   return new Promise(resolve => {
